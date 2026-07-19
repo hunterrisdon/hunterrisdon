@@ -1,11 +1,6 @@
 <div align="center">
 
-<!-- hero: monochrome ASCII portrait (types in) beside a neofetch-style info
-     panel. regenerate portrait: python scripts/prep_photo.py <photo> &&
-     python scripts/make_ascii_svg.py ; info panel: python scripts/make_info_card.py -->
-
-<!-- animated contribution graph: real data, boxes reveal cell by cell
-     (regenerated daily by .github/workflows/update-profile-art.yml) -->
+<!-- animated contribution graph (regenerated daily by .github/workflows/update-profile-art.yml) -->
 
 <img src="./contrib-heatmap.svg" width="860" alt="hunter's github contribution graph — auto-refreshed daily" />
 
@@ -13,10 +8,12 @@
 <br>
 
 <table>
-<tr>
-<td valign="top"><img src="./ascii-portrait.svg" width="370" alt="hunter risdon — ascii portrait" /></td>
-<td valign="top"><img src="./info-card.svg" width="490" alt="hunter risdon — experience, stack, highlights" /></td>
-</tr>
+     <tr>
+          <!-- portrait (python scripts/prep_photo.py <photo> & python scripts/make_ascii_svg.py) ; info panel: python scripts/make_info_card.py -->
+          <td valign="top"><img src="./ascii-portrait.svg" width="370" alt="hunter risdon — ascii portrait" /></td>
+          <!-- portrait (python scripts/prep_photo.py <photo> & python scripts/make_ascii_svg.py) ; info panel: python scripts/make_info_card.py -->
+          <td valign="top"><img src="./info-card.svg" width="490" alt="hunter risdon — experience, stack, highlights" /></td>
+     </tr>
 </table>
 
 <br>
