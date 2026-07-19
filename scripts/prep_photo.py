@@ -42,5 +42,15 @@ mask = cv2.GaussianBlur(mask, (0, 0), 1.0)
 out = gray.astype(np.float32) * mask + 255.0 * (1.0 - mask)
 out = np.clip(out, 0, 255).astype(np.uint8)
 
+# 4. trim to the subject's bounding box (+ small margin) so the subject fills
+# the frame regardless of how the source was cropped -- make_ascii_svg stretches
+# the whole image into a fixed grid, so leftover margin would shrink the face.
+ys, xs = np.where(alpha > 24)
+if len(xs) and len(ys):
+    pad = int(0.04 * max(out.shape))
+    y0, y1 = max(0, ys.min() - pad), min(out.shape[0], ys.max() + pad)
+    x0, x1 = max(0, xs.min() - pad), min(out.shape[1], xs.max() + pad)
+    out = out[y0:y1, x0:x1]
+
 Image.fromarray(out, mode="L").save(OUT)
 print("wrote", OUT, out.shape)

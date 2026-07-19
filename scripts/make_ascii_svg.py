@@ -141,7 +141,7 @@ parts.append(f'<line x1="0" y1="{status_line_y:.1f}" x2="{CANVAS_W}" y2="{status
 # name regardless of name length -- no hand-tuned x offset to keep in sync.
 parts.append(f'<text x="{PAD}" y="{status_y:.1f}" fill="{TITLE_TEXT}" font-size="13" '
              f'font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">'
-             f'hunter@github:~$ whoami <tspan fill="{INK}">Hunter Risdon</tspan>'
+             f'hunter@github:~$ whoami <tspan fill="{INK}">hunter risdon</tspan>'
              f'<tspan fill="{INK}">&#9608;'
              f'<animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.5;0.51;1" '
              f'dur="1s" repeatCount="indefinite"/></tspan></text>')

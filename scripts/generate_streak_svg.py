@@ -30,7 +30,7 @@ CELL, GAP, RAD, LEFT, TOP = 13, 3, 2.5, 34, 24
 COLORS = ["#161b22", "#0e4429", "#006d32", "#26a641", "#39d353"]
 FLASH = "#b4ffaa"
 GRAY = "#7d8590"
-MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
+MONTHS = ["jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"]
 
 n = len(contribs)
 NW = (n + 6) // 7
@@ -49,7 +49,7 @@ for wk in range(NW):
     if d.month != last_m:
         last_m = d.month
         labels.append(f'<text class="lbl" x="{LEFT+wk*(CELL+GAP)}" y="{TOP-8}">{MONTHS[d.month-1]}</text>')
-for name, r in [("Mon",1),("Wed",3),("Fri",5)]:
+for name, r in [("mon",1),("wed",3),("fri",5)]:
     labels.append(f'<text class="lbl" x="2" y="{TOP+r*(CELL+GAP)+CELL-2}">{name}</text>')
 
 for i, c in enumerate(contribs):

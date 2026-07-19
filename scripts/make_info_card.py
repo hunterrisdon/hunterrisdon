@@ -39,20 +39,20 @@ ACCENT = "#22d3ee"
 # ("gap",)                     -> vertical space
 ROWS = [
     ("host",),
-    ("kv", "Now", "Technical Solutions Engineer @ Epic"),
-    ("kv", "Prev", "SWE Intern @ Salve Therapeutics"),
-    ("kv", "Also", "Building a productivity startup"),
-    ("kv", "Edu", "Bioengineering: Biotech, UCSD '25"),
+    ("kv", "now", "technical solutions engineer @ epic"),
+    ("kv", "prev", "swe intern @ salve therapeutics"),
+    ("kv", "also", "building a productivity startup"),
+    ("kv", "edu", "bioengineering: biotech, ucsd '25"),
     ("gap",),
-    ("sec", "Stack"),
-    ("kv", "Frontend", "React, Next.js, TypeScript, React Native"),
-    ("kv", "Backend", "Node, Python, Supabase, Firebase"),
-    ("kv", "AI / ML", "Vercel AI SDK, Anthropic, OpenCV"),
-    ("kv", "Cloud", "Vercel, Upstash, Inngest, Expo"),
+    ("sec", "stack"),
+    ("kv", "frontend", "react, next.js, typescript, react native"),
+    ("kv", "backend", "node, python, supabase, firebase"),
+    ("kv", "ai / ml", "vercel ai sdk, anthropic, opencv"),
+    ("kv", "cloud", "vercel, upstash, inngest, expo"),
     ("gap",),
-    ("sec", "Highlights"),
-    ("bul", "Task-Flow — AI-native productivity app"),
-    ("bul", "WarfaRef — mobile anticoagulation care"),
+    ("sec", "highlights"),
+    ("bul", "task-flow — ai-native productivity app"),
+    ("bul", "warfaref — mobile anticoagulation care"),
 ]
 
 
