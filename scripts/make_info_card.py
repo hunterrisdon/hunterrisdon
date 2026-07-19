@@ -14,7 +14,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "..", "info-card.svg")
 STATIC = bool(os.environ.get("STATIC"))
 
-W, H = 480, 376
+W, H = 580, 376  # widened so the longest stack row (frontend, 6 items) fits on one line
 PAD = 20
 TITLEBAR_H = 30
 KEY_X = PAD
@@ -45,10 +45,10 @@ ROWS = [
     ("kv", "edu", "bioengineering: biotech, ucsd '25"),
     ("gap",),
     ("sec", "stack"),
-    ("kv", "frontend", "react, next.js, typescript, react native"),
-    ("kv", "backend", "node, python, supabase, firebase"),
-    ("kv", "ai / ml", "vercel ai sdk, anthropic, opencv"),
-    ("kv", "cloud", "vercel, upstash, inngest, expo"),
+    ("kv", "frontend", "react, next.js, typescript, javascript, html, tailwind css"),
+    ("kv", "backend", "node.js, python, postgresql, redis"),
+    ("kv", "ai / ml", "pytorch, tensorflow, anthropic, opencv"),
+    ("kv", "cloud", "vercel, firebase, gcp, inngest"),
     ("gap",),
     ("sec", "highlights"),
     ("bul", "ts application development lead"),
