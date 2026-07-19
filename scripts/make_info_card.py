@@ -41,7 +41,7 @@ ROWS = [
     ("host",),
     ("kv", "now", "technical solutions engineer @ epic"),
     ("kv", "prev", "swe intern @ salve therapeutics"),
-    ("kv", "also", "building a productivity startup"),
+    ("kv", "also", "building a productivity web app"),
     ("kv", "edu", "bioengineering: biotech, ucsd '25"),
     ("gap",),
     ("sec", "stack"),
@@ -51,8 +51,9 @@ ROWS = [
     ("kv", "cloud", "vercel, upstash, inngest, expo"),
     ("gap",),
     ("sec", "highlights"),
-    ("bul", "task-flow — ai-native productivity app"),
-    ("bul", "warfaref — mobile anticoagulation care"),
+    ("bul", "ts application development lead"),
+    ("bul", "lumens - endoscopy clinical operations"),
+    ("bul", "ai champion @ epic"),
 ]
 
 
@@ -96,8 +97,9 @@ for i, row in enumerate(ROWS):
         inner = (f'<text x="{KEY_X}" y="{y:.1f}" font-size="14" font-weight="700">'
                  f'<tspan fill="{GREEN}">hunter</tspan><tspan fill="{MUTED}">@</tspan>'
                  f'<tspan fill="{ACCENT}">github</tspan></text>'
-                 f'<line x1="{KEY_X+96}" y1="{y-4:.1f}" x2="{W-PAD}" y2="{y-4:.1f}" '
-                 f'stroke="{FRAME}" stroke-opacity="0.8"/>')
+                 # rule starts past the end of "hunter@github" (14px bold mono ~8.6px/char)
+                 f'<line x1="{KEY_X + int(len("hunter@github") * 8.6) + 10}" y1="{y-4:.1f}" '
+                 f'x2="{W-PAD}" y2="{y-4:.1f}" stroke="{FRAME}" stroke-opacity="0.8"/>')
     elif kind == "sec":
         title = esc(row[1])
         inner = (f'<text x="{KEY_X}" y="{y:.1f}" fill="{SECTION}" font-size="12.5" font-weight="700">'
