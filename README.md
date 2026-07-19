@@ -1,6 +1,6 @@
 <div align="center">
      
-<p><b>professional debugger and clinical informatics analyst</b></p>
+<p><b>engineer * clinical informatics</b></p>
 
 <br>
 <br>
