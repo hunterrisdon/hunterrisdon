@@ -1,6 +1,6 @@
 <div align="center">
      
-<p><b>engineer * clinical informatics</b></p>
+<p><b>engineer - clinical informatics</b></p>
 
 <br>
 <br>
