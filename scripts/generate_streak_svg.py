@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
 """Generate an animated GitHub-streak SVG (squares light up one by one).
-Works standalone; designed to run in a GitHub Action daily to stay live.
+
+Pulls the rolling last-365-days window (ending today) from the public
+contributions API, so each run reflects the current date -- the same window
+github.com shows on the profile. Run daily by
+.github/workflows/update-profile-art.yml so the committed SVG stays current.
+
 Usage: python generate_streak_svg.py [username] [output.svg]
 """
 import sys, json, os, datetime, urllib.request
@@ -14,9 +19,10 @@ def get_data(user):
         with urllib.request.urlopen(url, timeout=25) as r:
             return json.loads(r.read().decode())
     except Exception as e:
-        # fallback to a local snapshot if the API is unreachable
+        # Fallback to a local snapshot if the API is unreachable -- but only for
+        # local runs. In CI we must fail loudly instead of committing stale data.
         here = os.path.join(os.path.dirname(os.path.abspath(__file__)), "contrib.json")
-        if os.path.exists(here):
+        if os.path.exists(here) and not os.environ.get("GITHUB_ACTIONS"):
             print("API failed (%s); using local contrib.json" % e)
             return json.load(open(here))
         raise
@@ -33,7 +39,10 @@ GRAY = "#7d8590"
 MONTHS = ["jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"]
 
 n = len(contribs)
-NW = (n + 6) // 7
+sd = datetime.date.fromisoformat(contribs[0]["date"])
+OFFSET = (sd.weekday() + 1) % 7          # row of the first day (sunday = 0)
+NW = (OFFSET + n + 6) // 7               # weeks needed once we pad to a sunday start
+WEEK0 = sd - datetime.timedelta(days=OFFSET)  # the sunday that starts column 0
 W = LEFT + NW*(CELL+GAP) + 6
 H = TOP + 7*(CELL+GAP) + 22
 
@@ -42,10 +51,9 @@ REVEAL, DUR = 3.6, 0.55
 maxorder = (NW-1) + 6*0.55
 
 rects, labels = [], []
-sd = datetime.date.fromisoformat(contribs[0]["date"])
 last_m = None
 for wk in range(NW):
-    d = sd + datetime.timedelta(days=wk*7)
+    d = WEEK0 + datetime.timedelta(days=wk*7)
     if d.month != last_m:
         last_m = d.month
         labels.append(f'<text class="lbl" x="{LEFT+wk*(CELL+GAP)}" y="{TOP-8}">{MONTHS[d.month-1]}</text>')
@@ -53,7 +61,8 @@ for name, r in [("mon",1),("wed",3),("fri",5)]:
     labels.append(f'<text class="lbl" x="2" y="{TOP+r*(CELL+GAP)+CELL-2}">{name}</text>')
 
 for i, c in enumerate(contribs):
-    wk, row, lvl = i//7, i%7, c["level"]
+    pos = OFFSET + i                      # slot in the sunday-aligned grid
+    wk, row, lvl = pos//7, pos%7, c["level"]
     x = LEFT + wk*(CELL+GAP); y = TOP + row*(CELL+GAP)
     delay = round((wk + row*0.55)/maxorder * REVEAL, 3)
     cls = "c g" if lvl >= 1 else "c e"
@@ -63,6 +72,7 @@ for i, c in enumerate(contribs):
     )
 
 svg = f'''<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" font-family="-apple-system,Segoe UI,Helvetica,Arial,sans-serif">
+<!-- {contribs[0]['date']} to {contribs[-1]['date']} (rolling last year), generated {datetime.date.today().isoformat()} -->
 <style>
   text.lbl {{ fill:{GRAY}; font-size:13px; font-weight:600; }}
   text.total {{ fill:#e6edf3; font-size:15px; font-weight:700; }}
