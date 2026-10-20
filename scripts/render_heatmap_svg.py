@@ -6,7 +6,8 @@ classic 53-week x 7-day calendar, revealed once with a diagonal line-after-line
 slide-down (CSS keyframes, plays on load then freezes -- no looping "glow"), a
 Less->More legend, and a real stats footer.
 
-Run by .github/workflows/update-profile-art.yml after fetch_contributions.py.
+Optional alternative look (terminal frame + stats footer). Run it by hand after
+fetch_contributions.py; the daily workflow uses generate_streak_svg.py instead.
 """
 import datetime
 import json

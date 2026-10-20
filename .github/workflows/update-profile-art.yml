@@ -1,0 +1,48 @@
+# Regenerates contrib-heatmap.svg every day so the graph always shows the
+# rolling last-365-days window ending today (same window github.com shows).
+#
+# Scheduled workflows only run from the default branch, so this takes effect
+# once it is merged into main. Trigger it by hand any time from the Actions
+# tab via "Run workflow".
+name: update profile art
+
+on:
+  schedule:
+    - cron: "17 0 * * *"   # daily at 00:17 UTC (off the hour to dodge the queue rush)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-profile-art
+  cancel-in-progress: false
+
+jobs:
+  heatmap:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: set up python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # stdlib only -- no pip install needed. The script fails the job (rather
+      # than falling back to the stale local snapshot) when GITHUB_ACTIONS is set.
+      - name: regenerate contribution heatmap
+        run: python scripts/generate_streak_svg.py hunterrisdon contrib-heatmap.svg
+
+      - name: commit and push if changed
+        run: |
+          if git diff --quiet -- contrib-heatmap.svg; then
+            echo "contrib-heatmap.svg unchanged; nothing to commit"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add contrib-heatmap.svg
+          git commit -m "chore: refresh contribution heatmap ($(date -u +%Y-%m-%d))"
+          git push

@@ -6,7 +6,9 @@ write data/contributions.json with the raw days plus derived stats
 (current streak, longest streak, best day, monthly totals).
 
 No token, no auth, no GraphQL -- just the public HTML GitHub already serves.
-Run daily by .github/workflows/update-profile-art.yml.
+
+Optional alternative pipeline (feeds render_heatmap_svg.py). Not wired into
+.github/workflows/update-profile-art.yml, which uses generate_streak_svg.py.
 """
 import datetime
 import json
