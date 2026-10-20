@@ -1,6 +1,6 @@
 <div align="center">
      
-<p><b>self taught swe - B.S. in biotechnology</b></p>
+<p><b>engineer of all things cool</b></p>
 
 <br>
 <br>
