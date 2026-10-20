@@ -1,6 +1,6 @@
 <div align="center">
      
-<p><b>engineer - clinical informatics</b></p>
+<p><b>self taught swe - B.S. in bioengineering: biotechnology</b></p>
 
 <br>
 <br>
